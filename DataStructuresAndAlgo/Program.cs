@@ -8,11 +8,85 @@ using System.Threading.Tasks;
 
 namespace DataStructuresAndAlgo
 {
-    
+
     public class Program
     {
+        static int solution(string S)
+        {
+            if (!string.IsNullOrEmpty(S))
+            {
+                int V = Convert.ToInt32(S, 2);
+                int stepCount = 0;
+
+                if (V != 0)
+                {
+                    bool isEnd = false;
+                    while (!isEnd)
+                    {
+                        bool isEven = (V % 2) == 0;
+                        if (isEven)
+                        {
+                            V = V / 2;
+                        }
+                        else
+                        {
+                            V = V - 1;
+                        }
+
+                        stepCount++;
+                        if (V == 0)
+                            isEnd = true;
+
+                    }
+                }
+
+                return stepCount;
+            }
+            return 0;
+
+
+        }
+
+        static int solution1(string S)
+        {
+            string originalValue = S;
+            int cyclicCount=0;
+
+            for(int i =0; i < S.Length -1; i++)
+            {
+                string subStringToAppend = S.Substring(0, 1);
+                string remainingString = S.Substring(1, S.Length - 1);
+                S = remainingString + subStringToAppend;
+
+                if (originalValue == S)
+                {
+                    break; 
+                }
+                cyclicCount++;
+            }
+            return cyclicCount;   
+        }
+
+        static void solution2(string S, string T)
+        {
+            string[] s = S.Split(':');
+            TimeSpan ts1 = new TimeSpan(Convert.ToInt32(s[0]), Convert.ToInt32(s[1]), Convert.ToInt32(s[2]));
+
+
+            string[] t = T.Split(':');
+            TimeSpan ts2 = new TimeSpan(Convert.ToInt32(t[0]), Convert.ToInt32(t[1]), Convert.ToInt32(t[2]));
+
+
+        }
+
         static void Main(string[] args)
         {
+           solution2("15:15:00", "15:15:12");
+            //solution2("22:22:21", "22:22:23");
+            solution1("s codility");
+
+
+            // solution("101010");
 
             LinkList llist = new LinkList();
             llist.Append(5);
@@ -20,8 +94,8 @@ namespace DataStructuresAndAlgo
             llist.Append(7);
             llist.Append(8);
             llist.Prepend(4);
-            
-            
+
+
 
             //llist.DeleteWithValue(6);
 
@@ -52,12 +126,12 @@ namespace DataStructuresAndAlgo
             list.RemoveFromStart();
 
             list.PrintAllNodes();
-            
+
 
             Console.ReadLine();
 
             LinkedList<string> strLinkedList = new LinkedList<string>();
-            
+
 
 
             List<string> str = new List<string>();
@@ -206,7 +280,7 @@ namespace DataStructuresAndAlgo
             // 1->7->8->6->4->NUllist
             llist.insertAfter(llist.head.next, 8);
 
-           Console.WriteLine("\nCreated Linked list is: ");
+            Console.WriteLine("\nCreated Linked list is: ");
             llist.printList();
         }
     }
